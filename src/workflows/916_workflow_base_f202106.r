@@ -18,7 +18,7 @@ envg$EXPENV$repo_dir <- "~/dmeyf2024/"
 envg$EXPENV$datasets_dir <- "~/buckets/b1/datasets/"
 envg$EXPENV$messenger <- "~/install/zulip_enviar.sh"
 
-envg$EXPENV$semilla_primigenia <- 113149
+envg$EXPENV$semilla_primigenia <- 250231
 
 # leo el unico parametro del script
 args <- commandArgs(trailingOnly=TRUE)
@@ -134,7 +134,7 @@ FEhist_base <- function( pinputexps)
 
   param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
-  param_local$lag1 <- TRUE
+  param_local$lag1 <- FALSE
   param_local$lag2 <- FALSE # no me engraso con los lags de orden 2
   param_local$lag3 <- FALSE # no me engraso con los lags de orden 3
 
@@ -429,7 +429,7 @@ G01_GrupoB_WCVn <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
+  DT_incorporar_dataset( "~/buckets/b1/datasets/datasets_competencia_02.csv.gz")
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
