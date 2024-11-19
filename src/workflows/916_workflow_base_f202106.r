@@ -430,6 +430,7 @@ G01_GrupoB_WCVn <- function( pnombrewf )
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
   DT_incorporar_dataset( "~/buckets/b1/datasets/datasets_competencia_02.csv.gz")
+  # DT_incorporar_dataset( "~/buckets/b1/datasets/datasets_competencia_02_sin_baja.csv.gz")
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
