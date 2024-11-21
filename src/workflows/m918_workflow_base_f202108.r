@@ -134,7 +134,7 @@ FEhist_base <- function( pinputexps)
 
   param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
-  param_local$lag1 <- TRUE
+  param_local$lag1 <- FALSE
   param_local$lag2 <- TRUE # no me engraso con los lags de orden 2
   param_local$lag3 <- FALSE # no me engraso con los lags de orden 3
 
