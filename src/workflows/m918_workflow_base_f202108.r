@@ -420,7 +420,7 @@ KA_evaluate_kaggle <- function( pinputexps )
 # Este es el  Workflow Baseline
 # Que predice 202108 donde NO conozco la clase
 
-wf_001 <- function( pnombrewf )
+wf_0002 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
@@ -439,7 +439,7 @@ wf_001 <- function( pnombrewf )
     mtry_ratio= 0.2
   )
 
-  #CN_canaritos_asesinos_base(ratio=0.2, desvio=4.0)
+  CN_canaritos_asesinos_base(ratio=1, desvio=0)
 
   # Etapas modelado
   ts8 <- TS_strategy_base8()
@@ -457,5 +457,5 @@ wf_001 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_001()
+wf_0002()
 
