@@ -1,31 +1,59 @@
-# Define el directorio correctamente
-DIR <- "C:/Users/glova/OneDrive/Documentos"
+# Ruta del archivo
+ruta_archivo <- "C:/Users/glova/OneDrive/Documentos/ejemploternaria.csv"
 
-# Cargamos los datos
-cat("Cargando datos...\n")
-data <- fread(paste0(DIR, "/ejemploternaria.csv"))
+# Leer el archivo especificando el separador
+df <- read.csv(ruta_archivo, sep = ";", stringsAsFactors = FALSE)
 
+# Asegurarse de que foto_mes sea un entero
+df$foto_mes <- as.integer(df$foto_mes)
 
-# Ordenar los datos por número de cliente y foto_mes
-data <- data[order(data$numero_de_cliente, data$foto_mes), ]
+# Ordenar los datos por cliente y por periodo
+df <- df[order(df$numero_de_cliente, df$foto_mes), ]
 
-# Crear la columna clase_ternaria
-data$clase_ternaria <- "CONTINUA" # Inicializar con CONTINUA
+# Obtener el periodo más reciente
+ultimo_periodo <- max(df$foto_mes, na.rm = TRUE)
 
-# Identificar BAJA+1 y BAJA+2
-for (i in 1:(nrow(data) - 1)) {
-  if (data$numero_de_cliente[i] == data$numero_de_cliente[i + 1]) {
-    if (data$foto_mes[i + 1] != data$foto_mes[i] + 1) {
-      data$clase_ternaria[i] <- "BAJA+1"
-    }
-  } else {
-    data$clase_ternaria[i] <- "BAJA+2"
-  }
-}
+# Crear columnas temporales para verificar la continuidad de registros
+library(dplyr)
 
-# Asegurar que los clientes en el último foto_mes tienen CONTINUA
-ultimo_mes <- max(data$foto_mes)
-data$clase_ternaria[data$foto_mes == ultimo_mes] <- "CONTINUA"
+df <- df %>%
+  group_by(numero_de_cliente) %>%
+  mutate(
+    siguiente_mes = lead(foto_mes, 1),
+    dos_meses_despues = lead(foto_mes, 2)
+  ) %>%
+  ungroup()
 
-# Guardamos el dataset
-fwrite(data, paste0(DIR, "/competencia_0223_ejmplo.csv"))
+# Condiciones para asignar clase_ternaria
+df$clase_ternaria <- "CONTINUA"  # Por defecto
+
+# Identificar BAJA+1: cuando no existe el siguiente mes
+df <- df %>%
+  mutate(
+    clase_ternaria = ifelse(
+      is.na(siguiente_mes) & foto_mes < ultimo_periodo,
+      "BAJA+1",
+      clase_ternaria
+    )
+  )
+
+# Identificar BAJA+2: cuando no existe dos meses después y el cliente no es BAJA+1
+df <- df %>%
+  mutate(
+    clase_ternaria = ifelse(
+      is.na(dos_meses_despues) & 
+      foto_mes < (ultimo_periodo - 1) & 
+      clase_ternaria != "BAJA+1",
+      "BAJA+2",
+      clase_ternaria
+    )
+  )
+
+# Eliminar columnas temporales
+df <- df %>% select(-siguiente_mes, -dos_meses_despues)
+
+# Mostrar resultados para verificar
+print(head(df, 20))
+
+# Si es necesario guardar los resultados
+write.csv(df, "C:/Users/glova/OneDrive/Documentos/resultado33_ternaria.csv", row.names = FALSE)
