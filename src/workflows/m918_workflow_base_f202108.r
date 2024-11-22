@@ -425,7 +425,7 @@ wf_agosto <- function( pnombrewf )
   param_local <- exp_wf_init( pnombrewf ) # linea workflow inicial fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
+  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02_nuevo.csv")
 
   # Etapas preprocesamiento
   CA_catastrophe_base( metodo="MachineLearning")
@@ -433,7 +433,7 @@ wf_agosto <- function( pnombrewf )
   DR_drifting_base(metodo="rank_cero_fijo")
   FEhist_base()
 
-  FErf_attributes_base( arbolitos= 20,
+  FErf_attributes_base( arbolitos= 25,
     hojas_por_arbol= 16,
     datos_por_hoja= 1000,
     mtry_ratio= 0.2
