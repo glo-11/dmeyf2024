@@ -107,7 +107,7 @@ HT_tuning_base <- function(iteraciones = 50) {
 # Flujo principal
 wf_mejorado <- function(nombre) {
   param_local <- exp_wf_init(nombre)
-  DT_incorporar_dataset("~/buckets/b1/datasets/competencia_02.csv.gz")
+  DT_incorporar_dataset("~/buckets/b1/datasets/competencia_02_final.csv.gz")
   CA_catastrophe_base("MICE")
   FEintra_manual_base()
   DR_drifting_base("deflacion")
