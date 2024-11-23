@@ -137,7 +137,7 @@ FEhist_base <- function( pinputexps)
   param_local$meta$script <- "/src/wf-etapas/z1501_FE_historia.r"
 
   param_local$lag1 <- TRUE
-  param_local$lag2 <- FALSE # no me engraso con los lags de orden 2
+  param_local$lag2 <- TRUE # no me engraso con los lags de orden 2
   param_local$lag3 <- FALSE # no me engraso con los lags de orden 3
 
   # no me engraso las manos con las tendencias
@@ -476,12 +476,12 @@ KA_evaluate_kaggle_semillerio <- function( pinputexps )
 # Que predice 202107 donde conozco la clase
 # y ya genera graficos
 
-wf_SEMI_ago_orden227 <- function( pnombrewf )
+wf_SEMI_004_orden227 <- function( pnombrewf )
 {
   param_local <- exp_wf_init( pnombrewf ) # linea fija
 
   # Etapa especificacion dataset de la Segunda Competencia Kaggle
-  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02.csv.gz")
+  DT_incorporar_dataset( "~/buckets/b1/datasets/competencia_02_final.csv.gz")
 
   CA_catastrophe_base( metodo="MachineLearning")
   FEintra_manual_base()
@@ -518,6 +518,6 @@ wf_SEMI_ago_orden227 <- function( pnombrewf )
 # Aqui comienza el programa
 
 # llamo al workflow con future = 202108
-wf_SEMI_ago_orden227()
+wf_SEMI_004_orden227()
 
 
