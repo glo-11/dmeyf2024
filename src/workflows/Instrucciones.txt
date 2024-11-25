@@ -1,0 +1,5 @@
+Segunda Competencia Kaggle
+1.	Descargar el archivo del dataset crudo correspondiente a esta competencia: https://storage.googleapis.com/open-courses/dmeyf2024-b725/competencia_02_crudo.csv.gz
+2.	Para poder obtener la columna de clase_ternaria se debe ejecutar el archivo: ~\dmeyf2024\src\workflows\ternariafinal.ipynb luego de modificar la segunda y última celda con las rutas necesarias
+3.	Finalmente ejecutar el archivo ~\dmeyf2024\src\workflows\z909_run_orden227.r, basado en el archivo ~\dmeyf2024\src\workflows\z918_workflow_base_f202108.r, en el cual se recomienda cambiar el nombre de la función wf_SEMI_003_orden227 para poder ubicar los resultados con mayor facilidad dentro del bucket.
+Nota: Para este experimento se modificó la etapa z1311_FE_rfatributes.r
